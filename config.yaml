@@ -1,0 +1,125 @@
+# AWS settings
+aws:
+  region: "us-east-1"
+  model_id: "anthropic.claude-3-haiku-20240307-v1:0"
+  temperature: 0
+  maxTokens: 2048
+  topP: 1
+
+# Restrictive Terms
+restrictive_terms:
+  - "COVID-19"
+  - "Coronavirus"
+  - "closeout"
+  - "ecofriendly"
+  - "free shipping"
+  - "100% natural"
+
+# Prompt Management
+prompts:
+  system_prompt: |
+    You are an expert Amazon product listing optimizer with deep knowledge of e-commerce SEO and Amazon's search algorithm. Your role is to analyze product information and craft high-converting, search-optimized product listings.
+  search_keywords_prompt: |
+    You are an AI assistant specialized in extracting relevant search keywords from product descriptions. Your task is to analyze the given text and generate a list of keywords that would be useful for search engine optimization (SEO) and product categorization.
+    
+    Instructions:
+    Generate a list of Amazon search-optimized keywords to increase product visibility and traffic.
+    
+    Please provide:
+    1. A list of 10-15 highly relevant, search-optimized keywords or key phrases.
+    2. 3-5 long-tail keyword phrases that capture specific product features or uses.
+    3. 2-3 trending or seasonal keywords related to the product (if applicable).
+    
+    Ensure the keywords:
+    - Are relevant to the product and its features
+    - Include a mix of broad and specific terms
+    - Incorporate brand-related terms where appropriate
+    - Consider common misspellings or alternative phrasings
+    - Align with Amazon's keyword best practices (e.g., no competitor brand names, no duplicate words)
+    
+    Optimize for relevance, search volume, and conversion potential.
+
+    Product Information:
+    Title: {title}
+    Description: {description}
+    Bullets: {bullets}
+    Brand: {brand}
+    Color: {color}
+  product_title_prompt: |
+    Optimize the product title for ASIN {asin} to increase Amazon traffic:
+    
+    Guidelines:
+    1. Character limit: {title_char_range} character range (including spaces)
+    2. Title structure: Brand + Title + Descriptor + Keywords + Size + Pack Size (if applicable) + Color
+    3. Keyword usage: Incorporate as many provided keywords as possible, prioritizing higher-ranked ones (#1 is most important, #40 least)
+    4. Avoid restricted words: {restrictive_terms}
+    5. Extract product model name/ID from the current title and use it accordingly. 
+    
+    Product details:
+    - Current title: {title}
+    - Description: {description}
+    - Bullet points: {bullets}
+    - Brand: {brand}
+    - Color: {color}
+    - Keywords (ranked): {keywords}
+    
+    Please provide an optimized title that adheres to these guidelines and effectively incorporates the product information and keywords.
+  product_description_prompt: |
+    Optimize the product description for ASIN {asin} to increase Amazon traffic:
+    
+    Guidelines:
+    1. Format: Paragraph form
+    2. Length: {description_char_range} character range (including spaces)
+    3. Content focus:
+       - Highlight reasons for purchase
+       - Describe product usage
+       - Tell a compelling product story
+    4. Include details about:
+       - How the product is used
+       - How it works
+       - Appearance and texture
+       - Suitable locations for use
+       - Potential applications
+       - Unique features
+    5. Restricted words: Avoid using any words from this list: {restrictive_terms}
+    6. Incorporate information from all provided product details
+    
+    Product details:
+    - Title: {title}
+    - Current description: {description}
+    - Bullet points: {bullets}
+    - Brand: {brand}
+    - Color: {color}
+    - Keywords: {keywords}
+    
+    Please craft an engaging and informative product description that adheres to these guidelines, effectively showcases the product's features and benefits, and incorporates relevant keywords to boost Amazon traffic.
+  product_bullets_prompt: |
+    Create five compelling bullet points to increase Amazon traffic for the product:
+    
+    Guidelines:
+    1. Format: Five bullet points, each with a title
+    2. Length: {bullets_char_range} character range per bullet (including spaces)
+    3. Structure: One complete sentence per bullet
+    4. Content focus:
+       - Key product features
+       - Unique selling points compared to competitors
+       - Product uses and applications
+       - Size and dimensions (if relevant)
+       - Set-up instructions (if applicable)
+       - Style guide information (if necessary)
+    5. Formatting:
+       - Use numerals for numbers (don't spell them out)
+       - Avoid restricted words: {restrictive_terms}
+    6. Incorporate relevant keywords to boost searchability
+    
+    Product details:
+    - Title: {title}
+    - Description: {description}
+    - Current bullets: {bullets}
+    - Brand: {brand}
+    - Color: {color}
+    - Keywords: {keywords}
+    
+    Please create five informative and engaging bullet points that adhere to these guidelines, effectively highlight the product's key features and benefits, and incorporate relevant keywords to boost Amazon traffic.
+
+
